@@ -21,7 +21,7 @@ class TrainListController extends GetxController {
         errorMessage.value = null;
       }
     } catch (e) {
-      errorMessage.value = 'An error occurred while loading train data.';
+      errorMessage.value = 'An error occurred while loading train data or no trains found.';
       trainData.value = null;
     }
   }
