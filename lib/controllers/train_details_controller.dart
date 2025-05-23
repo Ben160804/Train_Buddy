@@ -16,7 +16,7 @@ class TrainDetailsController extends GetxController {
     required String date,
   }) async {
     try {
-      print('🚂 Fetching train details for: Train: $trainName, Number: $trainNumber, Date: $date');
+      print(' Fetching train details for: Train: $trainName, Number: $trainNumber, Date: $date');
       
       isLoading.value = true;
       errorMessage.value = '';
@@ -27,17 +27,17 @@ class TrainDetailsController extends GetxController {
         date: date,
       );
       
-      print('📥 Response received: ${response != null}');
+      print(' Response received: ${response != null}');
       
       if (response == null) {
         throw Exception('No response received from the server');
       }
 
-      print('🔑 Response keys: ${response.keys.toList()}');
+      print(' Response keys: ${response.keys.toList()}');
 
       // Validate required fields
       if (!response.containsKey('schedule') || !response.containsKey('train_info')) {
-        print('❌ Missing required fields. Available keys: ${response.keys.toList()}');
+        print(' Missing required fields. Available keys: ${response.keys.toList()}');
         throw Exception('Invalid response format: missing required fields');
       }
 
@@ -63,14 +63,14 @@ class TrainDetailsController extends GetxController {
 
         trainDetails.value = details;
         
-        print('✅ Successfully parsed schedule with ${details.data!.schedule.length} stations');
+        print(' Successfully parsed schedule with ${details.data!.schedule.length} stations');
 
       } catch (e, stackTrace) {
-        print('❌ Parsing error: $e\nStack trace: $stackTrace');
+        print(' Parsing error: $e\nStack trace: $stackTrace');
         throw Exception('Failed to process train details: $e');
       }
     } catch (e) {
-      print('❌ Error: $e');
+      print(' Error: $e');
       errorMessage.value = e.toString().replaceAll('Exception: ', '');
     } finally {
       isLoading.value = false;
