@@ -110,8 +110,8 @@ class TrainFinderController extends GetxController {
       isLoading.value = true;
       errorMessage.value = null;
 
-      debugPrint('🔍 Starting train search...');
-      debugPrint('📝 Form Data:');
+      debugPrint(' Starting train search...');
+      debugPrint(' Form Data:');
       debugPrint('   Source Name: ${sourceNameController.text}');
       debugPrint('   Source Code: ${sourceCodeController.text}');
       debugPrint('   Destination Name: ${destinationNameController.text}');
@@ -126,13 +126,13 @@ class TrainFinderController extends GetxController {
         date: dateController.text,
       );
 
-      debugPrint('✅ Train search completed successfully');
-      debugPrint('📊 Found ${result.data.length} trains');
+      debugPrint(' Train search completed successfully');
+      debugPrint(' Found ${result.data.length} trains');
 
       trainData.value = result;
       Get.toNamed('/train-list', arguments: result);
     } catch (e) {
-      debugPrint('❌ Error in train search: $e');
+      debugPrint(' Error in train search: $e');
       errorMessage.value = _getUserFriendlyErrorMessage(e.toString());
     } finally {
       isLoading.value = false;
@@ -140,14 +140,14 @@ class TrainFinderController extends GetxController {
   }
 
   bool _validateInputs() {
-    debugPrint('🔍 Validating form inputs...');
+    debugPrint(' Validating form inputs...');
     
     if (sourceNameController.text.isEmpty ||
         sourceCodeController.text.isEmpty ||
         destinationNameController.text.isEmpty ||
         destinationCodeController.text.isEmpty ||
         dateController.text.isEmpty) {
-      debugPrint('❌ Validation failed: Empty fields');
+      debugPrint(' Validation failed: Empty fields');
       errorMessage.value = 'Please fill all fields';
       return false;
     }
@@ -155,7 +155,7 @@ class TrainFinderController extends GetxController {
     // Validate date format (YYYYMMDD)
     final dateRegex = RegExp(r'^\d{8}$');
     if (!dateRegex.hasMatch(dateController.text)) {
-      debugPrint('❌ Validation failed: Invalid date format');
+      debugPrint(' Validation failed: Invalid date format');
       errorMessage.value = 'Date must be in YYYYMMDD format (e.g., 20250521)';
       return false;
     }
@@ -164,12 +164,12 @@ class TrainFinderController extends GetxController {
     final stationCodeRegex = RegExp(r'^[A-Z]{2,4}$');
     if (!stationCodeRegex.hasMatch(sourceCodeController.text) ||
         !stationCodeRegex.hasMatch(destinationCodeController.text)) {
-      debugPrint('❌ Validation failed: Invalid station code format');
+      debugPrint(' Validation failed: Invalid station code format');
       errorMessage.value = 'Station codes must be 3-4 uppercase letters';
       return false;
     }
 
-    debugPrint('✅ Form validation passed');
+    debugPrint(' Form validation passed');
     return true;
   }
 
